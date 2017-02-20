@@ -9,7 +9,12 @@ namespace SimpleRationalAI
     class UserdefinedType
     {
         public string Name { get; set; }
-        public List<UserdefinedObject> Objects { get; set; }
-        public List<UserdefinedVerb> Verbs { get; set; }
+        public List<UserdefinedObject> Objects = new List<UserdefinedObject>();
+        public List<UserdefinedVerb> Verbs = new List<UserdefinedVerb>();
+
+        public UserdefinedType(string name)
+        {
+            Name = name;
+        }
     }
 }
