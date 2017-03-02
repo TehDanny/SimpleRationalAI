@@ -16,10 +16,5 @@ namespace SimpleRationalAI
         {
             Name = name;
         }
-
-        public UserdefinedObject()
-        {
-
-        }
     }
 }

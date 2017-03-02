@@ -43,10 +43,11 @@ namespace SimpleRationalAI
                 UserdefinedObject o = dataStorage.GetObject(inputObject);
                 if (o != null)
                 {
-                    UserdefinedType type = dataStorage.GetType(o, inputType);
-                    if(type != null)
+                    UserdefinedType typeCheck = dataStorage.GetType(o, inputType);
+                    if(typeCheck == null)
                     {
-                        dataStorage.AddType(o, type);
+                        UserdefinedType type = new UserdefinedType(inputType);
+                        dataStorage.AddType(ref o, type);
                         Console.WriteLine("The type called {0} has been added to the object called {1}.", inputType, inputObject);
                     }
                     else

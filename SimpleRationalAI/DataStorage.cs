@@ -17,12 +17,10 @@ namespace SimpleRationalAI
 
         public void CreateObject(string inputObjectName)
         {
-            bool objectAlreadyExists = false;
-            if (GetObject(inputObjectName) == null)
+            if (GetObject(inputObjectName) != null)
                 throw new Exception();
 
-            UserdefinedObject o = new UserdefinedObject();
-            o.Name = inputObjectName;
+            UserdefinedObject o = new UserdefinedObject(inputObjectName);
             AllObjects.Add(o);
         }
 
@@ -36,7 +34,7 @@ namespace SimpleRationalAI
             return null;
         }
 
-        public void AddType(UserdefinedObject o, UserdefinedType type)
+        public void AddType(ref UserdefinedObject o, UserdefinedType type)
         {
             o.Types.Add(type);
         }
