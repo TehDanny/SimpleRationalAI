@@ -8,11 +8,11 @@ namespace SimpleRationalAI
 {
     class AI // could be renamed to ClientHandler
     {
-        private List<UserdefinedObject> AllObjects; // could be moved to a data class
+        private DataStorage dataStorage;
 
         public AI()
         {
-            AllObjects = new List<UserdefinedObject>();
+            dataStorage = new DataStorage();
         }
 
         public void HandleInput(string userInput)
@@ -20,45 +20,33 @@ namespace SimpleRationalAI
             char delimiter = ' ';
             int wordCount = userInput.Split(delimiter).Length;
 
-            if (userInput.Split(delimiter)[0] == "create" && wordCount == 2)
+            if (wordCount == 1)
+                Console.WriteLine("Invalid syntax.");
+            else if (userInput.Split(delimiter)[0] == "create" && wordCount == 2) // Create object command
             {
-                string objectName = userInput.Split(delimiter)[1];
-                UserdefinedObject o = new UserdefinedObject(objectName);
-                AllObjects.Add(o);
-                Console.WriteLine("An object called {0} has been created", objectName);
+                try
+                {
+                    string objectName = userInput.Split(delimiter)[1];
+                    dataStorage.CreateObject(objectName);
+                    Console.WriteLine("An object called {0} has been created", objectName);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("The object you try to create already exists.");
+                }
+                
             }
-            else if(userInput.Split(delimiter)[1] == "is" && wordCount == 3)
+            else if (userInput.Split(delimiter)[1] == "is" && wordCount == 3) // Add type to object command
             {
                 string inputObject = userInput.Split(delimiter)[0];
                 string inputType = userInput.Split(delimiter)[2];
-                bool objectExists = false;
-                bool typeAlreadyDefined = false;
-                UserdefinedObject actualObject = null;
-                UserdefinedType actualType = null;
-
-                foreach (var item in AllObjects) // should be in the helper class
+                UserdefinedObject o = dataStorage.GetObject(inputObject);
+                if (o != null)
                 {
-                    if (inputObject == item.Name)
+                    UserdefinedType type = dataStorage.GetType(o, inputType);
+                    if(type != null)
                     {
-                        actualObject = item;
-                        objectExists = true;
-                        // return true, in helper class
-                    }
-                }
-                if (objectExists == true)
-                {
-                        foreach (var item in actualObject.Types) // should be in the helper class
-                        {
-                            if (inputType == item.Name)
-                            {
-                                typeAlreadyDefined = true;
-                                // return true, in helper class
-                            }
-                        }
-                    if(typeAlreadyDefined==false)
-                    {
-                        actualType = new UserdefinedType(inputType);
-                        actualObject.Types.Add(actualType);
+                        dataStorage.AddType(o, type);
                         Console.WriteLine("The type called {0} has been added to the object called {1}.", inputType, inputObject);
                     }
                     else
@@ -70,6 +58,10 @@ namespace SimpleRationalAI
                 {
                     Console.WriteLine("The object you try to define doesn't exist.");
                 }
+            }
+            else if (userInput.Split(delimiter)[1] == "can" && wordCount == 3) // Add verb to object command
+            {
+
             }
             else
             {

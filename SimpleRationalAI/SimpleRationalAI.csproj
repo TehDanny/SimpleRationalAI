@@ -43,11 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helper.cs" />
+    <Compile Include="DataStorage.cs" />
     <Compile Include="AI.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Type.cs" />
+    <Compile Include="UserCommand.cs" />
     <Compile Include="UserdefinedObject.cs" />
     <Compile Include="UserdefinedType.cs" />
     <Compile Include="UserdefinedVerb.cs" />
