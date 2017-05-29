@@ -61,13 +61,13 @@ namespace SimpleRationalAI
         {
             string inputObject = userInput.Split(' ')[0];
             string inputType = userInput.Split(' ')[2];
-            UserdefinedObject o = dataStorage.GetObjectFromAllObjects(inputObject);
-            if (o != null)
+            UserdefinedObject obj = dataStorage.GetObjectFromAllObjects(inputObject);
+            if (obj != null)
             {
-                UserdefinedType typeCheck = dataStorage.GetTypeFromObject(o, inputType);
+                UserdefinedType typeCheck = dataStorage.GetTypeFromObject(obj, inputType);
                 if (typeCheck == null)
                 {
-                    dataStorage.AddTypeToObject(ref o, inputType);
+                    dataStorage.AddTypeToObject(ref obj, inputType);
                     Console.WriteLine("The type called {0} has been added to the object called {1}.", inputType, inputObject);
                 }
                 else // Refactor to catch exception instead
@@ -85,13 +85,13 @@ namespace SimpleRationalAI
         {
             string inputObject = userInput.Split(' ')[0];
             string inputVerb = userInput.Split(' ')[2];
-            UserdefinedObject o = dataStorage.GetObjectFromAllObjects(inputObject);
-            if (o != null)
+            UserdefinedObject obj = dataStorage.GetObjectFromAllObjects(inputObject);
+            if (obj != null)
             {
-                UserdefinedVerb verbCheck = dataStorage.GetVerbFromObject(o, inputVerb);
+                UserdefinedVerb verbCheck = dataStorage.GetVerbFromObject(obj, inputVerb);
                 if (verbCheck == null)
                 {
-                    dataStorage.AddVerbToObject(ref o, inputVerb);
+                    dataStorage.AddVerbToObject(ref obj, inputVerb);
                     Console.WriteLine("The verb called {0} has been added to the object called {1}.", inputVerb, inputObject);
                 }
                 else // Refactor to catch exception instead

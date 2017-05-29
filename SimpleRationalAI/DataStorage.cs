@@ -25,8 +25,8 @@ namespace SimpleRationalAI
             if (GetObjectFromAllObjects(inputObject) != null)
                 throw new Exception();
 
-            UserdefinedObject o = new UserdefinedObject(inputObject);
-            allObjects.Add(o);
+            UserdefinedObject obj = new UserdefinedObject(inputObject);
+            allObjects.Add(obj);
         }
 
         public UserdefinedObject GetObjectFromAllObjects(string inputObject)
@@ -39,10 +39,10 @@ namespace SimpleRationalAI
             return null;
         }
 
-        public void AddTypeToObject(ref UserdefinedObject o, string inputType)
+        public void AddTypeToObject(ref UserdefinedObject obj, string inputType)
         {
             UserdefinedType type = new UserdefinedType(inputType);
-            o.Types.Add(type);
+            obj.Types.Add(type);
             bool typeIsNew = CheckIfTypeExistsInAllTypes(inputType);
             if (typeIsNew == true)
                 allTypes.Add(type);
@@ -58,9 +58,9 @@ namespace SimpleRationalAI
             return false;
         }
 
-        public UserdefinedType GetTypeFromObject(UserdefinedObject o, string inputType)
+        public UserdefinedType GetTypeFromObject(UserdefinedObject obj, string inputType)
         {
-            foreach (var item in o.Types)
+            foreach (var item in obj.Types)
             {
                 if (item.Name == inputType)
                     return item;
@@ -68,16 +68,16 @@ namespace SimpleRationalAI
             return null;
         }
 
-        public void AddVerbToObject(ref UserdefinedObject o, string inputVerb)
+        public void AddVerbToObject(ref UserdefinedObject obj, string inputVerb)
         {
             UserdefinedVerb verb = new UserdefinedVerb(inputVerb);
-            o.Verbs.Add(verb);
+            obj.Verbs.Add(verb);
             allVerbs.Add(verb);
         }
 
-        public UserdefinedVerb GetVerbFromObject(UserdefinedObject o, string inputVerb)
+        public UserdefinedVerb GetVerbFromObject(UserdefinedObject obj, string inputVerb)
         {
-            foreach (var item in o.Verbs)
+            foreach (var item in obj.Verbs)
             {
                 if (item.Name == inputVerb)
                     return item;
