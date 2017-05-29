@@ -61,21 +61,21 @@ namespace SimpleRationalAI
         {
             string inputObject = userInput.Split(' ')[0];
             string inputType = userInput.Split(' ')[2];
-            UserdefinedObject o = dataStorage.GetObject(inputObject);
+            UserdefinedObject o = dataStorage.GetObjectFromAllObjects(inputObject);
             if (o != null)
             {
-                UserdefinedType typeCheck = dataStorage.GetType(o, inputType);
+                UserdefinedType typeCheck = dataStorage.GetTypeFromObject(o, inputType);
                 if (typeCheck == null)
                 {
-                    dataStorage.AddType(ref o, inputType);
+                    dataStorage.AddTypeToObject(ref o, inputType);
                     Console.WriteLine("The type called {0} has been added to the object called {1}.", inputType, inputObject);
                 }
-                else
+                else // Refactor to catch exception instead
                 {
                     Console.WriteLine("The type you try to add to object {0} has already been added.", inputObject);
                 }
             }
-            else
+            else // Refactor to catch exception instead
             {
                 Console.WriteLine("The object you try to define doesn't exist.");
             }
@@ -85,21 +85,21 @@ namespace SimpleRationalAI
         {
             string inputObject = userInput.Split(' ')[0];
             string inputVerb = userInput.Split(' ')[2];
-            UserdefinedObject o = dataStorage.GetObject(inputObject);
+            UserdefinedObject o = dataStorage.GetObjectFromAllObjects(inputObject);
             if (o != null)
             {
-                UserdefinedVerb verbCheck = dataStorage.GetVerb(o, inputVerb);
+                UserdefinedVerb verbCheck = dataStorage.GetVerbFromObject(o, inputVerb);
                 if (verbCheck == null)
                 {
-                    dataStorage.AddVerb(ref o, inputVerb);
+                    dataStorage.AddVerbToObject(ref o, inputVerb);
                     Console.WriteLine("The verb called {0} has been added to the object called {1}.", inputVerb, inputObject);
                 }
-                else
+                else // Refactor to catch exception instead
                 {
                     Console.WriteLine("The verb you try to add to object {0} has already been added.", inputObject);
                 }
             }
-            else
+            else // Refactor to catch exception instead
             {
                 Console.WriteLine("The object you try to define doesn't exist.");
             }
@@ -107,6 +107,7 @@ namespace SimpleRationalAI
 
         private void AddVerbToType(string userInput)
         {
+            // Refactor to try catch instead
             string inputType = userInput.Split(' ')[1];
             string inputVerb = userInput.Split(' ')[3];
             dataStorage.AddVerbToType(inputVerb, inputType);

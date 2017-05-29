@@ -20,45 +20,45 @@ namespace SimpleRationalAI
             allVerbs = new List<UserdefinedVerb>();
         }
 
-        public void CreateObject(string inputObjectName)
+        public void CreateObject(string inputObject)
         {
-            if (GetObject(inputObjectName) != null)
+            if (GetObjectFromAllObjects(inputObject) != null)
                 throw new Exception();
 
-            UserdefinedObject o = new UserdefinedObject(inputObjectName);
+            UserdefinedObject o = new UserdefinedObject(inputObject);
             allObjects.Add(o);
         }
 
-        public UserdefinedObject GetObject(string inputObjectName)
+        public UserdefinedObject GetObjectFromAllObjects(string inputObject)
         {
             foreach (var item in allObjects)
             {
-                if (item.Name == inputObjectName)
+                if (item.Name == inputObject)
                     return item;
             }
             return null;
         }
 
-        public void AddType(ref UserdefinedObject o, string inputType)
+        public void AddTypeToObject(ref UserdefinedObject o, string inputType)
         {
             UserdefinedType type = new UserdefinedType(inputType);
             o.Types.Add(type);
-            bool typeIsNew = CheckIfTypeExistsInAllTypes(type);
+            bool typeIsNew = CheckIfTypeExistsInAllTypes(inputType);
             if (typeIsNew == true)
                 allTypes.Add(type);
         }
 
-        private bool CheckIfTypeExistsInAllTypes(UserdefinedType type)
+        private bool CheckIfTypeExistsInAllTypes(string inputType) // Change to GetTypeFromAllTypes(string inputType)
         {
             foreach (var item in allTypes)
             {
-                if (item.Name == type.Name)
+                if (item.Name == inputType)
                     return true;
             }
             return false;
         }
 
-        public UserdefinedType GetType(UserdefinedObject o, string inputType)
+        public UserdefinedType GetTypeFromObject(UserdefinedObject o, string inputType)
         {
             foreach (var item in o.Types)
             {
@@ -68,13 +68,14 @@ namespace SimpleRationalAI
             return null;
         }
 
-        public void AddVerb(ref UserdefinedObject o, string inputVerb)
+        public void AddVerbToObject(ref UserdefinedObject o, string inputVerb)
         {
             UserdefinedVerb verb = new UserdefinedVerb(inputVerb);
-
+            o.Verbs.Add(verb);
+            allVerbs.Add(verb);
         }
 
-        public UserdefinedVerb GetVerb(UserdefinedObject o, string inputVerb)
+        public UserdefinedVerb GetVerbFromObject(UserdefinedObject o, string inputVerb)
         {
             foreach (var item in o.Verbs)
             {
@@ -84,9 +85,21 @@ namespace SimpleRationalAI
             return null;
         }
 
+        private bool CheckIfVerbExistsInAllVerbs(string inputVerb) // Change to GetVerbFromAllVerbs(string inputVerb)
+        {
+            foreach (var item in allVerbs)
+            {
+                if (item.Name == inputVerb)
+                    return true;
+            }
+            return false;
+        }
+
         internal void AddVerbToType(string inputVerb, string inputType)
         {
             throw new NotImplementedException();
+            CheckIfVerbExistsInAllVerbs(inputVerb);
+            CheckIfTypeExistsInAllTypes(inputType);
         }
     }
 }
