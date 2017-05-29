@@ -10,11 +10,14 @@ namespace SimpleRationalAI
     {
         private List<UserdefinedObject> allObjects;
         private List<UserdefinedType> allTypes;
+        private List<UserdefinedVerb> allVerbs;
+
 
         public DataStorage()
         {
             allObjects = new List<UserdefinedObject>();
             allTypes = new List<UserdefinedType>();
+            allVerbs = new List<UserdefinedVerb>();
         }
 
         public void CreateObject(string inputObjectName)

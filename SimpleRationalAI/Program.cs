@@ -18,15 +18,14 @@ namespace SimpleRationalAI
         {
             string userInput = string.Empty;
             Console.WriteLine("***************************** Simple Rational AI *****************************\n");
-            //Console.WriteLine("Type \"help\" to show the available commands.");
             UserCommand.PrintHelpMenu();
             AI ai = new AI();
-            while (userInput.ToLower() != "quit")
+            do
             {
                 Console.Write("\nInput: ");
                 userInput = Console.ReadLine();
                 ai.HandleInput(userInput.ToLower());
-            }
+            } while (userInput.ToLower() != "quit");
         }
     }
 }
