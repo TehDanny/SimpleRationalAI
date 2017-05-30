@@ -47,9 +47,9 @@ namespace SimpleRationalAI
         {
             try
             {
-                string objectName = userInput.Split(' ')[1];
-                dataStorage.CreateObject(objectName);
-                Console.WriteLine("An object called {0} has been created", objectName);
+                string inputObject = userInput.Split(' ')[1];
+                dataStorage.CreateObject(inputObject);
+                Console.WriteLine("An object called {0} has been created", inputObject);
             }
             catch (Exception)
             {
@@ -61,6 +61,18 @@ namespace SimpleRationalAI
         {
             string inputObject = userInput.Split(' ')[0];
             string inputType = userInput.Split(' ')[2];
+
+            try
+            {
+                dataStorage.AddTypeToObject(inputObject, inputType);
+                Console.WriteLine("The type called {0} has been added to the object called {1}.", inputType, inputObject);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("The object you try to define doesn't exist.");
+            }
+
+            /*
             UserdefinedObject obj = dataStorage.GetObjectFromAllObjects(inputObject);
             if (obj != null)
             {
@@ -79,6 +91,7 @@ namespace SimpleRationalAI
             {
                 Console.WriteLine("The object you try to define doesn't exist.");
             }
+            */
         }
 
         private void AddVerbToObject(string userInput)
