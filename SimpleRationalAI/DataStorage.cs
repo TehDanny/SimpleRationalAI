@@ -39,6 +39,20 @@ namespace SimpleRationalAI
             return null;
         }
 
+        public void AddTypeToObject(string inputObject, string inputType)
+        {
+            if (GetObjectFromAllObjects(inputObject) == null)
+                throw new Exception();
+
+            if (GetTypeFromAllTypes(inputType) == null)
+            {
+                UserdefinedType type = new UserdefinedType(inputType);
+                allTypes.Add(type);
+                // Add the type to the object here, obj.Types.Add(type);
+            }
+        }
+
+        /*
         public void AddTypeToObject(ref UserdefinedObject obj, string inputType)
         {
             UserdefinedType type = new UserdefinedType(inputType);
@@ -47,8 +61,20 @@ namespace SimpleRationalAI
             if (typeIsNew == true)
                 allTypes.Add(type);
         }
+        */
 
-        private bool CheckIfTypeExistsInAllTypes(string inputType) // Change to GetTypeFromAllTypes(string inputType)
+        private UserdefinedType GetTypeFromAllTypes(string inputType)
+        {
+            foreach (var item in allTypes)
+            {
+                if (item.Name == inputType)
+                    return item;
+            }
+            return null;
+        }
+
+        /*
+        private bool CheckIfTypeExistsInAllTypes(string inputType)
         {
             foreach (var item in allTypes)
             {
@@ -57,6 +83,7 @@ namespace SimpleRationalAI
             }
             return false;
         }
+        */
 
         public UserdefinedType GetTypeFromObject(UserdefinedObject obj, string inputType)
         {
@@ -85,7 +112,18 @@ namespace SimpleRationalAI
             return null;
         }
 
-        private bool CheckIfVerbExistsInAllVerbs(string inputVerb) // Change to GetVerbFromAllVerbs(string inputVerb)
+        private UserdefinedVerb GetVerbFromAllVerbs(string inputVerb)
+        {
+            foreach (var item in allVerbs)
+            {
+                if (item.Name == inputVerb)
+                    return item;
+            }
+            return null;
+        }
+
+        /*
+        private bool CheckIfVerbExistsInAllVerbs(string inputVerb)
         {
             foreach (var item in allVerbs)
             {
@@ -94,12 +132,15 @@ namespace SimpleRationalAI
             }
             return false;
         }
+        */
 
         internal void AddVerbToType(string inputVerb, string inputType)
         {
             throw new NotImplementedException();
-            CheckIfVerbExistsInAllVerbs(inputVerb);
-            CheckIfTypeExistsInAllTypes(inputType);
+            GetVerbFromAllVerbs(inputVerb);
+            //CheckIfVerbExistsInAllVerbs(inputVerb);
+            GetTypeFromAllTypes(inputType);
+            //CheckIfTypeExistsInAllTypes(inputType);
         }
     }
 }
